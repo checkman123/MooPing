@@ -109,11 +109,14 @@ else
     app.UseHsts();
 }
 
+#region Pipelines
+app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAntiforgery();
 app.UseAuthentication();
 app.UseAuthorization();
+#endregion
 
 app.MapCarter(); //Map Api
 
