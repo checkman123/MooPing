@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\MooPing.Database\MooPing.Database.csproj" />
+    <ProjectReference Include="..\..\MooPing.Shared\MooPing.Shared.csproj" />
     <ProjectReference Include="..\MooPing.Client\MooPing.Client.csproj" />
 	  <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
 	  <PackageReference Include="JavaScriptEngineSwitcher.Core" Version="3.21.0" />

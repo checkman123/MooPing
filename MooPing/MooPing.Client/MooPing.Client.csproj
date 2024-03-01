@@ -13,4 +13,9 @@
 	<PackageReference Include="Blazor-ApexCharts" Version="2.3.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\MooPing.Database\MooPing.Database.csproj" />
+    <ProjectReference Include="..\..\MooPing.Shared\MooPing.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
