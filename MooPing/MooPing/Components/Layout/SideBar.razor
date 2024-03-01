@@ -3,7 +3,7 @@
     string? sourceRevisionId = Assembly.GetEntryAssembly().GetSourceRevisionId();
 }
 
-<HxSidebar MultipleItemsExpansion="false" @bind-Collapsed="Collapsed">
+<HxSidebar MultipleItemsExpansion="false">
 	<HeaderTemplate>
 		<HxSidebarBrand BrandName="Moo Ping" BrandNameShort="MP" />
 	</HeaderTemplate>
@@ -47,9 +47,3 @@
 	</FooterTemplate>
 
 </HxSidebar>
-
-
-
-@code {
-	public bool Collapsed { get; set; }
-}
