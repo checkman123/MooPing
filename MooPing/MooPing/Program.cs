@@ -6,6 +6,9 @@ using Serilog.Sinks.PostgreSQL;
 using Serilog;
 using Serilog.Events;
 using Serilog.Filters;
+using Havit.Blazor.Components.Web;
+using ApexCharts;
+using Havit.Blazor.Components.Web.Bootstrap;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +27,11 @@ builder.Services.AddWebOptimizer(pipeline =>
     pipeline.AddCssBundle("/css/site.css", "scss/site.scss");
     pipeline.MinifyJsFiles("js/**/*.js", "js/**/*.js");
 });
+
+//Havit Blazor Services
+builder.Services.AddHxServices();
+builder.Services.AddHxMessenger();
+builder.Services.AddHxMessageBoxHost();
 #endregion
 
 #region Logging
