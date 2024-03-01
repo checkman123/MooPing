@@ -4,46 +4,55 @@
 }
 
 <HxSidebar MultipleItemsExpansion="false">
-	<HeaderTemplate>
-		<HxSidebarBrand BrandName="Moo Ping" BrandNameShort="MP" />
-	</HeaderTemplate>
-	<ItemsTemplate>
-		<HxSidebarItem Text="Compact item" Icon="BootstrapIcon.Person" Href="." Match="NavLinkMatch.Prefix">
-			<HxSidebarItem Text="Try to rollout another item" Href="#x1" Match="NavLinkMatch.All" />
-			<HxSidebarItem Text="Seriously try it" Href="TEST" />
-		</HxSidebarItem>
-		<HxSidebarItem Text="Another compact item" Icon="BootstrapIcon.Person">
-			<HxSidebarItem Text="I Think you should try to rollout some more" Href="/HxSidebarTest#x1" Match="NavLinkMatch.All" />
-			<HxSidebarItem Text="And i bet you cant rollout two at once" Href="TEST" />
-		</HxSidebarItem>
-		<HxSidebarItem Text="Yet another compact item" Href="TEST" Icon="BootstrapIcon.Clock">
-			<HxSidebarItem Text="There is no stop to this" Icon="BootstrapIcon.Person" Href="#" />
-			<HxSidebarItem Text="You can never open two at once" Icon="BootstrapIcon.Clock" Href="TEST" />
-		</HxSidebarItem>
-		<HxSidebarItem Text="Empty item" Href="TEST" Icon="BootstrapIcon.Wallet2" />
-	</ItemsTemplate>
-
-	    <TogglerTemplate>
-		<div class="d-flex">
-			@if (context.SidebarCollapsed)
-			{
-				<span style="transform: translateX(15px) rotate(-90deg); font-size: 0.5rem;">
-					OPEN
-				</span>
-				<HxIcon Icon="BootstrapIcon.CaretRight" />
-			}
-			else
-			{
-				<HxIcon Icon="BootstrapIcon.CaretLeft" />
-				<span style="transform: translateX(-15px) rotate(90deg); font-size: 0.5rem;">
-					CLOSE
-				</span>
-			}
-		</div>
-	</TogglerTemplate>
-	<FooterTemplate>
-		<HxSidebarFooter Href="/login" Icon="BootstrapIcon.Person" Text="@(context.SidebarCollapsed ? null : "Login")" />
-		<HxSidebarFooter Text="@sourceRevisionId" />
-	</FooterTemplate>
-
+    <HeaderTemplate>
+        <HxSidebarBrand BrandName="Moo Ping" BrandNameShort="MP" />
+    </HeaderTemplate>
+    <ItemsTemplate>
+        <HxSidebarItem Text="@($"Hello, {Username}")" />
+        <HxSidebarItem Text="Compact item" Icon="BootstrapIcon.Person" Href="." Match="NavLinkMatch.Prefix">
+            <HxSidebarItem Text="Try to rollout another item" Href="#x1" Match="NavLinkMatch.All" />
+            <HxSidebarItem Text="Seriously try it" Href="TEST" />
+        </HxSidebarItem>
+        <HxSidebarItem Text="Another compact item" Icon="BootstrapIcon.Person">
+            <HxSidebarItem Text="I Think you should try to rollout some more" Href="/HxSidebarTest#x1" Match="NavLinkMatch.All" />
+            <HxSidebarItem Text="And i bet you cant rollout two at once" Href="TEST" />
+        </HxSidebarItem>
+        <HxSidebarItem Text="Yet another compact item" Href="TEST" Icon="BootstrapIcon.Clock">
+            <HxSidebarItem Text="There is no stop to this" Icon="BootstrapIcon.Person" Href="#" />
+            <HxSidebarItem Text="You can never open two at once" Icon="BootstrapIcon.Clock" Href="TEST" />
+        </HxSidebarItem>
+        <HxSidebarItem Text="Empty item" Href="TEST" Icon="BootstrapIcon.Wallet2" />
+    </ItemsTemplate>
+    <FooterTemplate>
+        @if (Username != null)
+        {
+            <HxSidebarFooter Href="/api/Account/Logout" Icon="BootstrapIcon.Person" Text="@(context.SidebarCollapsed ? "" : "Logout")" />
+        }
+        else
+        {
+            <HxSidebarFooter Href="/api/Account/Login?redirectUri=/" Icon="BootstrapIcon.Person" Text="@(context.SidebarCollapsed ? "" : "Login")" />
+        }
+        <HxSidebarFooter Text="@($"Version: {sourceRevisionId}")" />
+    </FooterTemplate>
 </HxSidebar>
+
+@code {
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+
+    private string Username = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        // ...existing code...
+
+        // 👇 new code
+        if (authenticationState is not null)
+        {
+            var state = await authenticationState;
+
+            Username = state?.User?.Identity?.Name ?? string.Empty;
+        }
+        // 👆 new code
+    }
+}

@@ -1,0 +1,30 @@
+﻿@page "/test"
+@attribute [Authorize]
+@rendermode InteractiveAuto
+
+<PageTitle>Test</PageTitle>
+
+<h1>Test</h1>
+
+<p>Hello @Username!</p>
+
+@code{
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+
+    private string Username = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        // ...existing code...
+
+        // 👇 new code
+        if (authenticationState is not null)
+        {
+            var state = await authenticationState;
+
+            Username = state?.User?.Identity?.Name ?? string.Empty;
+        }
+        // 👆 new code
+    }
+}

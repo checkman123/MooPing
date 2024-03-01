@@ -4,12 +4,14 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>87e6011b-1acf-4e56-87f5-e035dd1210cc</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\MooPing.Database\MooPing.Database.csproj" />
     <ProjectReference Include="..\..\MooPing.Shared\MooPing.Shared.csproj" />
     <ProjectReference Include="..\MooPing.Client\MooPing.Client.csproj" />
+    <PackageReference Include="Auth0.AspNetCore.Authentication" Version="1.4.1" />
     <PackageReference Include="Havit.Blazor.Components.Web" Version="4.5.5" />
     <PackageReference Include="Havit.Blazor.Components.Web.Bootstrap" Version="4.5.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />

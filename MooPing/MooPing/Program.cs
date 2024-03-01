@@ -7,8 +7,11 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Filters;
 using Havit.Blazor.Components.Web;
-using ApexCharts;
-using Havit.Blazor.Components.Web.Bootstrap;
+using Auth0.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Components.Authorization;
+using MooPing.AuthenticationStateSyncer;
+using MooPing.Database;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +38,10 @@ builder.Services.AddDbContext<MooPingDbContext>(options =>
 builder.Services.AddHxServices();
 builder.Services.AddHxMessenger();
 builder.Services.AddHxMessageBoxHost();
+
+//Auth0
+builder.Services.AddCascadingAuthenticationState();
+builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
 #endregion
 
 #region Logging
@@ -77,12 +84,23 @@ if (!string.IsNullOrEmpty(logConnectionString))
 }
 #endregion
 
+#region Auth0 Login
+builder.Services.AddAuth0WebAppAuthentication(options =>
+{
+    options.Domain = builder.Configuration["Auth0:Domain"];
+    options.ClientId = builder.Configuration["Auth0:ClientId"];
+    options.Scope = "openid profile email";
+});
+#endregion
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseWebAssemblyDebugging();
+	app.UseDeveloperExceptionPage();
+	app.UseWebAssemblyDebugging();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
 else
 {
@@ -92,9 +110,11 @@ else
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 app.UseAntiforgery();
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapCarter(); //Map Api
 
 app.MapRazorComponents<App>()

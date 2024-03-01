@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooPing", "MooPing\MooPing\MooPing.csproj", "{CCF347FD-B448-46B7-B344-FDE5462B3A4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooPing", "MooPing\MooPing\MooPing.csproj", "{CCF347FD-B448-46B7-B344-FDE5462B3A4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooPing.Client", "MooPing\MooPing.Client\MooPing.Client.csproj", "{6D848F0B-3149-48B4-9D33-092D49C5D8FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooPing.Client", "MooPing\MooPing.Client\MooPing.Client.csproj", "{6D848F0B-3149-48B4-9D33-092D49C5D8FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooPing.Database", "MooPing.Database\MooPing.Database.csproj", "{D3E2811E-2DE4-44CF-BF90-B9FFEF5DA86B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooPing.Database", "MooPing.Database\MooPing.Database.csproj", "{D3E2811E-2DE4-44CF-BF90-B9FFEF5DA86B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MooPing.Shared", "MooPing.Shared\MooPing.Shared.csproj", "{F82CB480-C8B8-44B2-83C0-02B6DE9B52C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MooPing.Shared", "MooPing.Shared\MooPing.Shared.csproj", "{F82CB480-C8B8-44B2-83C0-02B6DE9B52C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
