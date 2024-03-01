@@ -21,7 +21,11 @@ namespace MooPing.Database.Entities
 		public string Description { get; set; }
 		public decimal Amount { get; set; }
 		public DateTime Date { get; set; }
-		public virtual Category? Category { get; set; }
+        public bool IsRecurring { get; set; }
+        public RecurrenceFrequency RecurrenceFrequency { get; set; }
+        public DateTime? EndDate { get; set; }
+
+        public virtual Category? Category { get; set; }
 		public virtual User? User { get; set; }
 	}
 }
