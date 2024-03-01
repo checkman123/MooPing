@@ -28,6 +28,9 @@ builder.Services.AddWebOptimizer(pipeline =>
     pipeline.MinifyJsFiles("js/**/*.js", "js/**/*.js");
 });
 
+builder.Services.AddDbContext<MooPingDbContext>(options =>
+            options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 //Havit Blazor Services
 builder.Services.AddHxServices();
 builder.Services.AddHxMessenger();
