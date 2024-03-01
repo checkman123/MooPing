@@ -24,7 +24,7 @@
         <HxSidebarItem Text="Empty item" Href="TEST" Icon="BootstrapIcon.Wallet2" />
     </ItemsTemplate>
     <FooterTemplate>
-        @if (Username != null)
+        @if (!string.IsNullOrEmpty(Username))
         {
             <HxSidebarFooter Href="/api/Account/Logout" Icon="BootstrapIcon.Person" Text="@(context.SidebarCollapsed ? "" : "Logout")" />
         }
