@@ -95,6 +95,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+app.MapCarter(); //Map Api
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
