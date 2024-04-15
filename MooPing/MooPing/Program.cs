@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using MooPing.AuthenticationStateSyncer;
 using MooPing.Database;
 using Microsoft.EntityFrameworkCore;
+using Supabase;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +33,7 @@ builder.Services.AddWebOptimizer(pipeline =>
 });
 
 builder.Services.AddDbContext<MooPingDbContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(builder.Configuration["MooPing:SupabaseConnectionString"]));
 
 //Havit Blazor Services
 builder.Services.AddHxServices();
@@ -48,7 +49,7 @@ builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAu
 
 // Configure serilog logging
 //Connection string is from Secret Manager. (Right-click on project and select "Manage User Secrets")
-var logConnectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+var logConnectionString = builder.Configuration["MooPing:SupabaseConnectionString"];
 
 if (!string.IsNullOrEmpty(logConnectionString))
 {
@@ -97,10 +98,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-	app.UseDeveloperExceptionPage();
-	app.UseWebAssemblyDebugging();
-	app.UseSwagger();
-	app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+    app.UseWebAssemblyDebugging();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 else
 {
