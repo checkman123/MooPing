@@ -8,7 +8,10 @@
         <HxSidebarBrand BrandName="Moo Ping" BrandNameShort="MP" />
     </HeaderTemplate>
     <ItemsTemplate>
-        <HxSidebarItem Text="@($"Hello, {Username}")" />
+        @if (!string.IsNullOrEmpty(Username))
+        {
+            <HxSidebarItem Text="@($"Hello, {Username}")" />
+        }
         <HxSidebarItem Text="Compact item" Icon="BootstrapIcon.Person" Href="." Match="NavLinkMatch.Prefix">
             <HxSidebarItem Text="Try to rollout another item" Href="#x1" Match="NavLinkMatch.All" />
             <HxSidebarItem Text="Seriously try it" Href="TEST" />
@@ -21,7 +24,10 @@
             <HxSidebarItem Text="There is no stop to this" Icon="BootstrapIcon.Person" Href="#" />
             <HxSidebarItem Text="You can never open two at once" Icon="BootstrapIcon.Clock" Href="TEST" />
         </HxSidebarItem>
-        <HxSidebarItem Text="Empty item" Href="TEST" Icon="BootstrapIcon.Wallet2" />
+        <HxSidebarItem Text="Expense" Icon="BootstrapIcon.Wallet2">
+            <HxSidebarItem Text="Main" Href="expense" Icon="BootstrapIcon.Wallet2" />
+            <HxSidebarItem Text="Detail" Href="expensedetail"/>
+        </HxSidebarItem>
     </ItemsTemplate>
     <FooterTemplate>
         @if (!string.IsNullOrEmpty(Username))
