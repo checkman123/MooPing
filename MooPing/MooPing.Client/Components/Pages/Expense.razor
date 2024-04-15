@@ -1,0 +1,35 @@
+﻿@page "/expense"
+@attribute [Authorize]
+@rendermode InteractiveAuto
+
+<PageTitle>Expense Tracker</PageTitle>
+
+
+
+
+<div class="container-sm">
+    <h1>Amount</h1>
+
+    <input />
+    <button class="btn btn-primary">Add</button>
+</div>
+
+
+
+
+@code{
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+
+    private string Username = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (authenticationState is not null)
+        {
+            var state = await authenticationState;
+
+            Username = state?.User?.Identity?.Name ?? string.Empty;
+        }
+    }
+}
